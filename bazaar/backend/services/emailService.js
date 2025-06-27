@@ -8,7 +8,7 @@ class EmailService {
   async initializeTransporter() {
     // Use Ethereal for testing, or real SMTP for production
     if (process.env.NODE_ENV === 'production') {
-      this.transporter = nodemailer.createTransporter({
+      this.transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
         secure: process.env.SMTP_SECURE === 'true',
@@ -20,7 +20,7 @@ class EmailService {
     } else {
       // Create test account for development
       const testAccount = await nodemailer.createTestAccount();
-      this.transporter = nodemailer.createTransporter({
+      this.transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
         secure: false,

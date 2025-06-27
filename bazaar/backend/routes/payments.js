@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { protect } = require('../middlewares/auth');
+const auth = require('../middlewares/auth');
 const { roles } = require('../middlewares/roles');
 const {
   createPayPalOrder,
@@ -10,9 +10,9 @@ const {
 } = require('../controllers/paymentController');
 
 // PayPal payment routes
-router.post('/paypal/create', protect, createPayPalOrder);
-router.post('/paypal/capture', protect, capturePayPalPayment);
-router.get('/paypal/order/:orderID', protect, getPayPalOrderDetails);
-router.post('/paypal/refund', protect, roles('admin', 'vendor'), refundPayPalPayment);
+router.post('/paypal/create', auth, createPayPalOrder);
+router.post('/paypal/capture', auth, capturePayPalPayment);
+router.get('/paypal/order/:orderID', auth, getPayPalOrderDetails);
+router.post('/paypal/refund', auth, roles('admin', 'vendor'), refundPayPalPayment);
 
 module.exports = router; 
