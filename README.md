@@ -54,3 +54,4 @@ bazaar/
 ├── backend/             # Node.js/Express API
 ├── shared/              # (optional) shared logic or types
 └── .env                 # API keys and secrets
+```
